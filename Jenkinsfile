@@ -1,7 +1,6 @@
 pipeline{
-    agent {
-        label "java"
-    }
+    agent any
+    
     tools{
         maven 'mvn-3-5-4'
         jdk 'java-11'
@@ -33,11 +32,11 @@ pipeline{
                 sh "docker images"
             }
         }
-        // stage("docker push"){
-        //     steps{
-        //         sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
-        //         sh "docker push hassaneid/iti-java:v${BUILD_NUMBER}"
-        //     }
-        // }
+        stage("docker push"){
+             steps{
+                 sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
+                 sh "docker push batoullmahmoud/iti-java:v${BUILD_NUMBER}"
+             }
+         }
     }
 }
